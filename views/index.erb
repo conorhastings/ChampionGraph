@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>ChampionGraphs</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+ </head>
+<body>
+
+<div id="container"><div id="header"></div>
+<div class="menu">
+<h3>Welcome</h3>
+<p>Welcome to ChampionGraphs. For now the site focuses on creating graphs for to compare NBA Championship seasons but we hope to expand to other sports soon.</p>
+
+
+</div>
+
+<div class="content">
+	<form action="/teamcomparisons" method="POST">
+		<h3>Click box for all teams</h3><br>
+	<input type="checkbox" name="all" value="all" onclick="var input = document.getElementById('team1'); if(this.checked){ input.disabled = true; input.focus();}else{input.disabled=false;};var input = document.getElementById('team2'); if(this.checked){ input.disabled = true; input.focus();}else{input.disabled=false;}">
+	<br>
+
+		<select name="team1" id="team1" >
+			<option selected="true" disabled="disabled">Choose First Team</option> 
+			 <% teams.each_with_index do |team, index| %>
+        <option value="<%= team_sym[index] %>"><%= team %></option>
+      <% end %>
+  </select>
+  <br>
+  <select name="team2" id="team2" >
+  	<option selected="true" disabled="disabled">Choose Second Team</option> 
+			 <% teams.each_with_index do |team, index| %>
+        <option value="<%= team_sym[index] %>"><%= team %></option>
+      <% end %>
+  </select>
+  <br>
+  <select name="games">
+  	<option selected="true" disabled="disabled"># of games to evaluate</option> 
+			 <% games.each do |game| %>
+        <option value="<%= game %>"><%= game %></option>
+      <% end %>
+ 	</select>
+  <br>
+
+  <button>Compare teams!</button>
+</form>
+<h3>Notes</h3>
+	<p>When comparing all teams over > 50 games, the 1999 Spurs will be excluded due to the lockout shortened season.<br><br>
+		When comparing all teams > 66 games, the 1999 Spurs and the 2012 Heat will be excluded due to lockout shortened season.<br><br>
+		When attempting to do comparisons with the 1999 Spurs with > 50 games, an error will be returned.<br><br>
+		When attempting comparisons with the 2012 Heat with > 66 games, an error will be returned</p>
+
+
+
+
+
+</div>	<div class="footer">
+</div>
+</div>
